@@ -4,8 +4,8 @@
 </div>
 
 <div>
-  <p><%= image_tag current_user.avatar.variant(resize: "100x100") %></p>
   <%= f.label :avatar %>
+  <p><%= image_tag current_user.avatar.variant(resize: "100x100") %></p>
   <%= f.file_field :avatar %>
 </div>
 
