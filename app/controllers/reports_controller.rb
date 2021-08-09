@@ -12,7 +12,7 @@ class ReportsController < ApplicationController
 
   # GET /reports/new
   def new
-    @report = Report.new
+    @report = current_user.reports.build
   end
 
   # GET /reports/1/edit
@@ -69,6 +69,6 @@ class ReportsController < ApplicationController
 
     def correct_user
       @report = current_user.reports.find_by(id: params[:id])
-      redirect_to root_url if @report.nil?
+      redirect_to reports_url if @report.nil?
     end
 end
