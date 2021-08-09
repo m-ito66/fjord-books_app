@@ -50,13 +50,13 @@ ActiveRecord::Schema.define(version: 2021_08_08_232755) do
   end
 
   create_table "relationships", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "follow_id", null: false
+    t.integer "follower_id"
+    t.integer "followed_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["follow_id"], name: "index_relationships_on_follow_id"
-    t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
-    t.index ["user_id"], name: "index_relationships_on_user_id"
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -77,6 +77,4 @@ ActiveRecord::Schema.define(version: 2021_08_08_232755) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "relationships", "users"
-  add_foreign_key "relationships", "users", column: "follow_id"
 end
