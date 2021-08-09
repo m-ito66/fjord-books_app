@@ -17,8 +17,10 @@
         <td><%= report.title %></td>
         <td><%= report.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日') %></td>
         <td><%= link_to 'Show', report %></td>
-        <td><%= link_to 'Edit', edit_report_path(report) %></td>
-        <td><%= link_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user == report.user %>
+          <td><%= link_to 'Edit', edit_report_path(report) %></td>
+          <td><%= link_to 'Destroy', report, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
