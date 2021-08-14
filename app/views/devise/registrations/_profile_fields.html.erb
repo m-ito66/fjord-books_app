@@ -3,6 +3,12 @@
   <%= f.text_field :name %>
 </div>
 
+<div>
+  <%= f.label :avatar %>
+  <p><%= image_tag current_user.avatar.variant(resize: "100x100") if current_user && current_user.avatar.attached? %></p>
+  <%= f.file_field :avatar %>
+</div>
+
 <div class="field">
   <%= f.label :postal_code %>
   <%= f.text_field :postal_code %>
