@@ -1,11 +1,28 @@
-
 en:
-  delete_confirm: Are you sure?
-  books:
+  views:
+    common:
+      show: show
+      edit: edit
+      destroy: destroy
+      new: new
+      back: back
+      delete_confirm: Are you sure?
+      title_new: "New %{name}"
+      title_edit: "Edit %{name}"
+  controller:
     create:
-      success: Book was successfully created.
+      success: "%{name} is successfully created."
     update:
-      success: Book was successfully updated.
+      success: "%{name} is successfully updated."
     destroy:
-      confirm: Are you sure?
-      success: Book was successfully destroyed.
+      success: "%{name} is successfully destroyed."
+  activerecord:
+    models:
+      book: Book
+
+    attributes:
+      book:
+        title: title
+        memo: memo
+        author: author
+        picture: image
