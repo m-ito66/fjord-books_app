@@ -10,6 +10,15 @@
   <%= @report.content %>
 </p>
 
+<p><strong><%= Comment.model_name.human %>:</strong></p>
+<% if @comments %>
+  <% @comments.each do |comment| %>
+  <p><%= comment.content %></p>
+  <% end %>
+<% end %>
+
+<%= render 'comments/comments_form' %>
+
 <% if current_user == @report.user %>
   <%= link_to t('views.common.edit'), edit_report_path(@report) %> |
 <% end %>
