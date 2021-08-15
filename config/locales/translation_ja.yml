@@ -22,3 +22,6 @@ ja:
         title: タイトル
         content: 内容
         created_at: 投稿日
+      comment:
+        content: コメント
+        created_at: 投稿日

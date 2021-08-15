@@ -1,0 +1,20 @@
+<p><strong><%= Comment.model_name.human %>:</strong></p>
+<% if @comments %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= Comment.human_attribute_name(:content) %></th>
+        <th><%= Comment.human_attribute_name(:created_at) %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td><%= comment.content %></td>
+          <td><%= comment.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日') %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
