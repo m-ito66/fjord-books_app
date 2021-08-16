@@ -1,8 +1,9 @@
 <p><strong><%= Comment.model_name.human %>:</strong></p>
-<% unless @comments.size == 0 %>
+<% unless @comments.empty? %>
   <table>
     <thead>
       <tr>
+        <th><%= User.model_name.human %></th>
         <th><%= Comment.human_attribute_name(:content) %></th>
         <th><%= Comment.human_attribute_name(:created_at) %></th>
         <th colspan="1"></th>
@@ -12,8 +13,9 @@
     <tbody>
       <% @comments.each do |comment| %>
         <tr>
+          <td><%= comment.user.name.empty? ? comment.user.email : comment.user.name %></td>
           <td><%= comment.content %></td>
-          <td><%= comment.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日') %></td>
+          <td><%= comment.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日%R') %></td>
           <td><%= link_to t('views.common.destroy'), '#', method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
       <% end %>
