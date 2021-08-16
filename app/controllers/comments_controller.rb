@@ -7,25 +7,19 @@ class CommentsController < ApplicationController
     @comment = @commentable.comments.build(comment_params)
     @comment.user = current_user
     if @comment.save
-      redirect_to @commentable
+      redirect_to @commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
-      redirect_to root_url
-    end
-  end
-
-  # PATCH/PUT /reports/1/comments/1
-  def update
-    if @comment.update(comment_params)
-      redirect_to [@report, @comment], notice: 'Comment was successfully updated.'
-    else
-      render :edit
+      rednder @commentable
     end
   end
 
   # DELETE /reports/1/comments/1
   def destroy
-    @comment.destroy
-    redirect_to @commentable
+    if @comment.destroy
+      redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
+    else
+      render @commentable
+    end
   end
 
   private
