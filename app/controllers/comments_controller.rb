@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
   before_action :set_commentable
   before_action :set_comment, only: [:edit, :update, :destroy]
+  before_action :correct_user, only: [:destroy]
 
   # POST /reports/1/comments
   def create
@@ -33,5 +34,10 @@ class CommentsController < ApplicationController
 
     def comment_params
       params.require(:comment).permit(:content)
+    end
+
+    def correct_user
+      @comment = current_user.comments.find_by(id: params[:id])
+      redirect_to reports_url if @comment.nil?
     end
 end
