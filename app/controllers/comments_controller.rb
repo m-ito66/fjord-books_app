@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :set_commentable
-  before_action :set_comment, only: [:edit, :update, :destroy]
+  before_action :set_comment, only: [:destroy]
   before_action :correct_user, only: [:destroy]
 
   # POST /reports/1/comments
@@ -24,20 +26,21 @@ class CommentsController < ApplicationController
   end
 
   private
-    def set_commentable
-      @commentable = Report.find_by(id: params[:report_id]) || Book.find_by(id: params[:book_id])
-    end
 
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
+  def set_commentable
+    @commentable = Report.find_by(id: params[:report_id]) || Book.find_by(id: params[:book_id])
+  end
 
-    def comment_params
-      params.require(:comment).permit(:content)
-    end
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
 
-    def correct_user
-      @comment = current_user.comments.find_by(id: params[:id])
-      redirect_to reports_url if @comment.nil?
-    end
+  def comment_params
+    params.require(:comment).permit(:content)
+  end
+
+  def correct_user
+    @comment = current_user.comments.find_by(id: params[:id])
+    redirect_to reports_url if @comment.nil?
+  end
 end
