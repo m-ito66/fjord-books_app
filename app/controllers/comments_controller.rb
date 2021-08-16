@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
   # DELETE /reports/1/comments/1
   def destroy
     @comment.destroy
-    redirect_to [@report, :comments], notice: 'Comment was successfully destroyed.'
+    redirect_to @commentable
   end
 
   private

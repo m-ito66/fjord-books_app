@@ -16,7 +16,7 @@
           <td><%= comment.user.name.empty? ? comment.user.email : comment.user.name %></td>
           <td><%= comment.content %></td>
           <td><%= comment.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日%R') %></td>
-          <td><%= link_to t('views.common.destroy'), '#', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <td><%= link_to t('views.common.destroy'), "#{params[:id]}/comments/#{comment.id}" , method: :delete, data: { confirm: t('views.common.delete_confirm') } %></td>
         </tr>
       <% end %>
     </tbody>
