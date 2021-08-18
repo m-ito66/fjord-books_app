@@ -32,7 +32,7 @@ class ReportsTest < ApplicationSystemTestCase
 
   test 'updating a Report' do
     visit reports_url
-    click_on '編集', match: :smart
+    click_on '編集'
 
     fill_in 'タイトル', with: 'Hi!'
     fill_in '内容', with: 'My hobby is reading books.'
@@ -45,7 +45,7 @@ class ReportsTest < ApplicationSystemTestCase
   test 'destroying a Report' do
     visit reports_url
     page.accept_confirm do
-      click_on '削除', match: :first
+      click_on '削除'
     end
 
     assert_text '日報が削除されました。'

@@ -18,6 +18,7 @@ class UserTest < ActiveSupport::TestCase
     assert_not me.following?(she)
     me.follow(she)
     assert me.following?(she)
+    assert she.followed_by?(me)
   end
 
   test '#unfollow' do
@@ -28,5 +29,6 @@ class UserTest < ActiveSupport::TestCase
     assert me.following?(she)
     me.unfollow(she)
     assert_not me.following?(she)
+    assert_not she.followed_by?(me)
   end
 end
