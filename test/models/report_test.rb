@@ -13,5 +13,4 @@ class ReportTest < ActiveSupport::TestCase
     assert @report.editable?(@user)
     assert_not @report.editable?(@another)
   end
-
 end

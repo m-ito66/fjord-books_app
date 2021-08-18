@@ -7,6 +7,7 @@ class ReportsTest < ApplicationSystemTestCase
     @report = reports(:first_report)
 
     visit root_url
+    assert_text 'アカウント登録もしくはログインしてください'
     fill_in 'Eメール', with: 'alice@example.com'
     fill_in 'パスワード', with: 'password'
     click_button 'ログイン'
@@ -28,6 +29,19 @@ class ReportsTest < ApplicationSystemTestCase
     assert_text '日報が作成されました。'
     assert_text 'Hello'
     assert_text "I'm Alice."
+
+    click_on '戻る'
+
+    assert_text @report.created_at.strftime('%y/%m/%d')
+  end
+
+  test ' failure to create a Report with form empty' do
+    visit reports_url
+    click_on '新規作成'
+    click_on '登録する'
+
+    assert_text 'タイトルを入力してください'
+    assert_text '内容を入力してください'
   end
 
   test 'updating a Report' do
@@ -39,7 +53,8 @@ class ReportsTest < ApplicationSystemTestCase
     click_on '更新する'
 
     assert_text '日報が更新されました。'
-    click_on '戻る'
+    refresh
+    assert_no_text '日報が更新されました。'
   end
 
   test 'destroying a Report' do
@@ -49,5 +64,7 @@ class ReportsTest < ApplicationSystemTestCase
     end
 
     assert_text '日報が削除されました。'
+    refresh
+    assert_no_text '削除'
   end
 end
