@@ -21,7 +21,8 @@ class CommentsController < ApplicationController
   private
 
   def set_commentable
-    @commentable = Report.find_by(id: params[:report_id]) || Book.find_by(id: params[:book_id])
+    @commentable = Report.find(params[:report_id]) if params[:report_id]
+    @commentable = Book.find(params[:book_id]) if params[:book_id]
   end
 
   def set_comment
