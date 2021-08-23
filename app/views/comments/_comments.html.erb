@@ -1,0 +1,26 @@
+<p><strong><%= Comment.model_name.human %>:</strong></p>
+<% unless @comments.empty? %>
+  <table>
+    <thead>
+      <tr>
+        <th><%= User.model_name.human %></th>
+        <th><%= Comment.human_attribute_name(:content) %></th>
+        <th><%= Comment.human_attribute_name(:created_at) %></th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @comments.each do |comment| %>
+        <tr>
+          <td><%= comment.user.name.empty? ? comment.user.email : comment.user.name %></td>
+          <td><%= comment.content %></td>
+          <td><%= comment.created_at.in_time_zone('Asia/Tokyo').strftime('%Y年%m月%d日%R') %></td>
+          <% if current_user == comment.user %>
+            <td><%= link_to t('views.common.destroy'), "#{params[:id]}/comments/#{comment.id}" , method: :delete, data: { confirm: t('views.common.delete_confirm') } %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
