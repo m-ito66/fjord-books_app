@@ -35,15 +35,6 @@ class ReportsTest < ApplicationSystemTestCase
     assert_text @report.created_at.strftime('%y/%m/%d')
   end
 
-  test ' failure to create a Report with form empty' do
-    visit reports_url
-    click_on '新規作成'
-    click_on '登録する'
-
-    assert_text 'タイトルを入力してください'
-    assert_text '内容を入力してください'
-  end
-
   test 'updating a Report' do
     visit reports_url
     click_on '編集'
