@@ -6,6 +6,21 @@ class ReportTest < ActiveSupport::TestCase
   setup do
     @report = reports(:first_report)
   end
+
+  test ' failure to create a Report with title empty' do
+    @report.title = nil
+
+    assert @report.invalid?
+    assert_includes @report.errors[:title], 'を入力してください'
+  end
+
+  test ' failure to create a Report with content empty' do
+    @report.content = nil
+
+    assert @report.invalid?
+    assert_includes @report.errors[:content], 'を入力してください'
+  end
+
   test '#editable?' do
     user = users(:alice)
     another = users(:bob)

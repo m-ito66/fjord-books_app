@@ -8,13 +8,6 @@ class UserTest < ActiveSupport::TestCase
     @another = users(:bob)
   end
 
-  test ' failure to create a Report with email empty' do
-    @user.email = nil
-
-    assert @user.invalid?
-    assert_includes @user.errors[:email], 'を入力してください'
-  end
-
   test '#name_or_email' do
     assert_equal 'alice@example.com', @user.name_or_email
     @user.name = 'alice'
